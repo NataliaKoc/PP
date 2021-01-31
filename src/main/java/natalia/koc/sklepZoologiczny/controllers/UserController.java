@@ -46,13 +46,22 @@ public class UserController {
 
     @PostMapping("/registration")
     public String registration(@Valid @ModelAttribute("userCommand")
-                                           User userForm, BindingResult bindingResult) {
+                                           User userForm, BindingResult bindingResult, Optional<Integer> id, Model model) {
         if(bindingResult.hasErrors()) {
             return "user/registrationForm";
         }
-        userService.saveUser(userForm);
-        profil.setUser(userForm);
-        profilRepozytorium.save(profil);
+        if(id.isPresent()){
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            String name = auth.getName();
+            userService.saveUser(userForm);
+            model.addAttribute("profil", profilRepozytorium.findByUser(userRepository.findByUsername(name)));
+            model.addAttribute("user", userRepository.findByUsername(name));
+            return "user/profil";
+        } else {
+            userService.saveUser(userForm);
+            profil.setUser(userForm);
+            profilRepozytorium.save(profil);
+        }
         return "user/registrationSuccess";
     }
 
@@ -85,6 +94,13 @@ public class UserController {
         return "user/profilForm";
     }
 
+    @GetMapping("/edycjaUsera")
+    public String edycjaUsera(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        model.addAttribute("userCommand", userRepository.findByUsername(name));
+        return "user/registrationForm";
+    }
 
 
     @InitBinder
