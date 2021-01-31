@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProfilRepozytorium extends JpaRepository<Profil, Integer> {
     Profil findByUser(User user);
+    Profil findByTelefon(String telefon);
 }

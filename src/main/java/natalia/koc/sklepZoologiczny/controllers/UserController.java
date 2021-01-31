@@ -15,6 +15,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/user")
@@ -57,15 +58,34 @@ public class UserController {
 
     @PostMapping("/registrationProfil")
     public String registrationProfil(@Valid @ModelAttribute("userCommand")
-                                             Profil profil, Model model, Errors error) {
+                                             Profil profil, Model model, Errors error, Optional<Integer> id) {
         if(error.hasErrors()) {
             return "user/profilForm";
         }
-
-        this.profil = profil;
-        model.addAttribute("userCommand", new User());
+        if(id.isPresent()) {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            String name = auth.getName();
+            profil.setUser(userRepository.findByUsername(name));
+            profilRepozytorium.save(profil);
+            model.addAttribute("profil", profilRepozytorium.findByUser(userRepository.findByUsername(name)));
+            model.addAttribute("user", userRepository.findByUsername(name));
+            return "user/profil";
+        } else {
+            this.profil = profil;
+            model.addAttribute("userCommand", new User());
+        }
         return "user/registrationForm";
     }
+
+    @GetMapping("/edycjaProfilu")
+    public String edycjaProfilu(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        model.addAttribute("userCommand", profilRepozytorium.findByUser(userRepository.findByUsername(name)));
+        return "user/profilForm";
+    }
+
+
 
     @InitBinder
     public void initBinder(WebDataBinder binder){
