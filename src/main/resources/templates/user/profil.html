@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="/shared/fragments :: header-css"></div>
+    <title>Szczegóły książki</title>
+</head>
+<body class="container">
+<div th:replace="/shared/fragments :: menu(home)"></div>
+<table border="1" class="table" th:object="${profil}">
+    <tr>
+        <thead class="thead-dark"><th>Imie</th><td th:text="*{imie}"></td></thead>
+    </tr>
+    <tr>
+        <thead class="thead-dark"><th>Nazwisko</th><td th:text="*{nazwisko}"></td></thead>
+    </tr>
+    <tr>
+        <thead class="thead-dark"><th>Numer telefonu</th><td th:text="*{telefon}"></td></thead>
+    </tr>
+    <tr>
+        <thead class="thead-dark"><th>Adres do wysyłki</th><td th:text="*{adres}"></td></thead>
+    </tr>
+    <tr>
+        <thead class="thead-dark"><th></th>
+            <td><a href="user/edycjaProfilu"><p style="text-align: right">Edytuj</p></a></td>
+        </thead>
+    </tr>
+</table>
+
+<table border="1" class="table" th:object="${user}">
+    <tr>
+        <thead class="thead-dark"><th>Nick</th><td th:text="*{username}"></td></thead>
+    </tr>
+    <tr>
+        <thead class="thead-dark"><th>Hasło</th><td>******</td></thead>
+    </tr>
+    <tr>
+        <thead class="thead-dark"><th>E-mail</th><td th:text="*{email}"></td></thead>
+    </tr>
+    <tr>
+        <thead class="thead-dark"><th></th><td><a href="user/edycjaUsera"><p style="text-align: right">Edytuj</p></a></td></thead>
+    </tr>
+</table>
+<div th:replace="/shared/fragments :: footer"></div>
+</body>
+</html>
