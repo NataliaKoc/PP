@@ -38,6 +38,9 @@
                 <li sec:authorize="hasRole('USER')" class="nav-item" th:classappend="${pageName eq 'profil'}?'active'">
                     <a class="nav-link" th:href="@{../user/profil}">Moj profil</a>
                 </li>
+                <li sec:authorize="hasRole('USER')" class="nav-item" th:classappend="${pageName eq 'koszyk'}?'active'">
+                    <a class="nav-link" th:href="@{../koszyk/koszyk}">Koszyk</a>
+                </li>
             </ul>
 
             <ul class="navbar-nav my-2 my-lg-0">

@@ -26,8 +26,7 @@ table {
     color: black;
 }
 .table {
-    margin-left: 10%;
-    width: 80%;
+    width: 100%;
 }
 
 .table th.sorting_asc {

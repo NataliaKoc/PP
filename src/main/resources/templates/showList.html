@@ -78,6 +78,8 @@
         <th th:if="${Tenprodukt.dostepnoscNaMagazynie == false}"> Nie </th>
         <th sec:authorize="isAuthenticated()">
             <a sec:authorize="hasRole('USER')" th:href="@{szegolyProduktu/{id}(id = ${Tenprodukt.id})}" class="btn btn-success"> Więcej</a>
+            <a sec:authorize="hasRole('USER')" th:href="@{/koszyk/dodajDoKoszyka/{id}/{page}/{size}
+                (id=${Tenprodukt.id}, page=${page.getNumber()}, size=${page.size})}" class="btn btn-primary"> Dodaj_do_koszyka</a>
             <a sec:authorize="hasRole('ADMIN')" th:href="@{{id}(id = ${Tenprodukt.id})}"  class="btn btn-primary"> Edytuj</a>
             <a sec:authorize="hasRole('ADMIN')" th:href="@{usun/{id}/{page}/{size}
                 (id=${Tenprodukt.id}, page=${page.getNumber()}, size=${page.size})}"

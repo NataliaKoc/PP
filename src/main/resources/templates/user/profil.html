@@ -6,7 +6,7 @@
     <title>Szczegóły książki</title>
 </head>
 <body class="container">
-<div th:replace="/shared/fragments :: menu(home)"></div>
+<div th:replace="/shared/fragments :: menu(profil)"></div>
 <table border="1" class="table" th:object="${profil}">
     <tr>
         <thead class="thead-dark"><th>Imie</th><td th:text="*{imie}"></td></thead>

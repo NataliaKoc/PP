@@ -35,6 +35,8 @@ public class BazaRepositoriesInitializer {
     private RoleRepository roleRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private KoszykRepozytorium koszykRepozytorium;
 
     @Bean
     InitializingBean init() {
