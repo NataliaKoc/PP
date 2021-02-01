@@ -1,5 +1,6 @@
 package natalia.koc.sklepZoologiczny.controllers;
 
+import natalia.koc.sklepZoologiczny.domain.Historia;
 import natalia.koc.sklepZoologiczny.domain.Profil;
 import natalia.koc.sklepZoologiczny.domain.User;
 import natalia.koc.sklepZoologiczny.repositories.HistoriaRepozytorium;
@@ -57,7 +58,7 @@ public class UserController {
         }
         if(id.isPresent()){
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            String name = auth.getName();
+            String name = auth.getName();//principal
             userService.saveUser(userForm);
             model.addAttribute("profil", profilRepozytorium.findByUser(userRepository.findByUsername(name)));
             model.addAttribute("user", userRepository.findByUsername(name));
@@ -113,6 +114,8 @@ public class UserController {
             historiaRepozytorium.deleteById(id);
         } else {
             historiaRepozytorium.findById(id).get().setCzyUserUsunal(true);
+            Historia his = historiaRepozytorium.findById(id).get();
+            historiaRepozytorium.save(his);
         }
         return "redirect:/user/profil";
     }
