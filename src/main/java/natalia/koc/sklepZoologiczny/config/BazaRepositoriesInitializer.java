@@ -41,7 +41,6 @@ public class BazaRepositoriesInitializer {
     @Bean
     InitializingBean init() {
         return () -> {
-
             if(dostawaRepozytorium.findAll().isEmpty()) {
                 for (var dostaw: DatabaseDumps.dostawy) {
                     dostaw.setDostawaId(null);

@@ -2,6 +2,7 @@ package natalia.koc.sklepZoologiczny.controllers;
 
 import natalia.koc.sklepZoologiczny.domain.Profil;
 import natalia.koc.sklepZoologiczny.domain.User;
+import natalia.koc.sklepZoologiczny.repositories.HistoriaRepozytorium;
 import natalia.koc.sklepZoologiczny.repositories.ProfilRepozytorium;
 import natalia.koc.sklepZoologiczny.repositories.UserRepository;
 import natalia.koc.sklepZoologiczny.services.UserService;
@@ -26,6 +27,8 @@ public class UserController {
     UserRepository userRepository;
     @Autowired
     private ProfilRepozytorium profilRepozytorium;
+    @Autowired
+    private HistoriaRepozytorium historiaRepozytorium;
     private Profil profil = new Profil();
 
 
@@ -39,8 +42,10 @@ public class UserController {
     public String profil(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
-        model.addAttribute("profil", profilRepozytorium.findByUser(userRepository.findByUsername(name)));
+        User user = userRepository.findByUsername(name);
+        model.addAttribute("profil", profilRepozytorium.findByUser(user));
         model.addAttribute("user", userRepository.findByUsername(name));
+        model.addAttribute("historia", historiaRepozytorium.findAllByUser(user));
         return "user/profil";
     }
 
@@ -100,6 +105,12 @@ public class UserController {
         String name = auth.getName();
         model.addAttribute("userCommand", userRepository.findByUsername(name));
         return "user/registrationForm";
+    }
+
+    @GetMapping("/usunHistorie/{id}")
+    public String usunHistorie(@PathVariable Integer id) {
+        historiaRepozytorium.deleteById(id);
+        return "redirect:/user/profil";
     }
 
 

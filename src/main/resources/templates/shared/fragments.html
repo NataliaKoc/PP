@@ -36,10 +36,10 @@
                     <a class="nav-link" th:href="@{../produkty/add}">Dodaj produkt</a>
                 </li>
                 <li sec:authorize="hasRole('USER')" class="nav-item" th:classappend="${pageName eq 'profil'}?'active'">
-                    <a class="nav-link" th:href="@{../user/profil}">Moj profil</a>
+                    <a class="nav-link" th:href="@{/user/profil}">Moj profil</a>
                 </li>
                 <li sec:authorize="hasRole('USER')" class="nav-item" th:classappend="${pageName eq 'koszyk'}?'active'">
-                    <a class="nav-link" th:href="@{../koszyk/koszyk}">Koszyk</a>
+                    <a class="nav-link" th:href="@{/koszyk/koszyk}">Koszyk</a>
                 </li>
             </ul>
 

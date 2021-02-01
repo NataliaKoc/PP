@@ -7,6 +7,7 @@
 </head>
 <body class="container">
 <div th:replace="/shared/fragments :: menu(profil)"></div>
+<h1>Mój profil</h1>
 <table border="1" class="table" th:object="${profil}">
     <tr>
         <thead class="thead-dark"><th>Imie</th><td th:text="*{imie}"></td></thead>
@@ -41,6 +42,32 @@
         <thead class="thead-dark"><th></th><td><a href="/user/edycjaUsera"><p style="text-align: right">Edytuj</p></a></td></thead>
     </tr>
 </table>
+
+<br>
+<h3>Historia zamówień</h3>
+<table border="1" class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th>Lp.</th>
+        <th>Nr. zamówienia</th>
+        <th>Data zamówienia</th>
+        <th>Kwota</th>
+        <th>Przewidywany czas dostawy</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tr th:each="Tenprodukt : ${historia}">
+        <th th:text="${TenproduktStat.count}"></th>
+        <th th:text="${Tenprodukt.nrZamowienia}"></th>
+        <th th:text="${Tenprodukt.dataZamowienia}"></th>
+        <th th:text="${Tenprodukt.cena}"></th>
+        <th th:text="${Tenprodukt.przewidywanyCzasDostawy}"></th>
+        <th style="width: 5px">
+            <a th:href="@{usunHistorie/{id}(id=${Tenprodukt.id})}" class="btn btn-light">x</a>
+        </th>
+    </tr>
+</table>
+
 <div th:replace="/shared/fragments :: footer"></div>
 </body>
 </html>
