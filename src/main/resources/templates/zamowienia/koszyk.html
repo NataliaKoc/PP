@@ -38,9 +38,9 @@
     <form th:method="post" th:action="@{zamowienie}" th:object="${dostawa}" style="text-align: right">
         <select>
             <option value="-1">Wybierz dostawe</option>
-            <option th:each="d:${dostawa}" th:value="${d.dostawaId}">
-                [[${d.nazwaFirmy}]]-[[${d.czasDostawy}]]-[[${d.cena}]]zł
-            </option>
+            <div><option th:each="dostawa: ${dostawa}" th:value="${dostawa.dostawaId}">
+                [[${dostawa.nazwaFirmy}]]-[[${dostawa.czasDostawy}]]-[[${dostawa.cena}]]zł
+            </option></div>
         </select><br><br>
         <input type="submit" value="Złóż zamówienie" class="btn btn-dark"/>
     </form>

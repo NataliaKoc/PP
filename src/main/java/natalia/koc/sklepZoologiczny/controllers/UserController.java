@@ -45,7 +45,7 @@ public class UserController {
         User user = userRepository.findByUsername(name);
         model.addAttribute("profil", profilRepozytorium.findByUser(user));
         model.addAttribute("user", userRepository.findByUsername(name));
-        model.addAttribute("historia", historiaRepozytorium.findAllByUser(user));
+        model.addAttribute("historia", historiaRepozytorium.findAllByUserAndCzyUserUsunal(user, false));
         return "user/profil";
     }
 
@@ -109,7 +109,11 @@ public class UserController {
 
     @GetMapping("/usunHistorie/{id}")
     public String usunHistorie(@PathVariable Integer id) {
-        historiaRepozytorium.deleteById(id);
+        if(historiaRepozytorium.findById(id).get().getCzyAdminUsunal().equals(true)) {
+            historiaRepozytorium.deleteById(id);
+        } else {
+            historiaRepozytorium.findById(id).get().setCzyUserUsunal(true);
+        }
         return "redirect:/user/profil";
     }
 

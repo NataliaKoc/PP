@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface HistoriaRepozytorium extends JpaRepository<Historia, Integer> {
-    List<Historia> findAllByUser(User user);
+    List<Historia> findAllByUserAndCzyUserUsunal(User user, Boolean nie);
+    List<Historia> findAllByCzyAdminUsunal(Boolean wartosc);
 }

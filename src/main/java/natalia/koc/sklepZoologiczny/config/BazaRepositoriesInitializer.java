@@ -37,10 +37,13 @@ public class BazaRepositoriesInitializer {
     private UserRepository userRepository;
     @Autowired
     private KoszykRepozytorium koszykRepozytorium;
+    @Autowired
+    private HistoriaRepozytorium historiaRepozytorium;
 
     @Bean
     InitializingBean init() {
         return () -> {
+
             if(dostawaRepozytorium.findAll().isEmpty()) {
                 for (var dostaw: DatabaseDumps.dostawy) {
                     dostaw.setDostawaId(null);

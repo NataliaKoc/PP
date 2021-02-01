@@ -99,7 +99,7 @@ public class koszykController {
             koszt = koszt + koszyk.getCena();
         }koszt = koszt+11.0f;
         Integer nrZam = rand.nextInt(89999)+10000;
-        Historia historia = new Historia(nrZam, LocalDate.now(), koszt, LocalDate.now().plusDays(3), user);
+        Historia historia = new Historia(nrZam, "Nieoplacone", LocalDate.now(), koszt, null, user, false, false);
         historiaRepozytorium.save(historia);
         List<Koszyk> koszyk1 = koszykRepozytorium.findAllByUser(user);
         for (Koszyk koszyk : koszykRepozytorium.findAllByUser(user)) {

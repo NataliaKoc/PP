@@ -53,6 +53,7 @@
         <th>Data zamówienia</th>
         <th>Kwota</th>
         <th>Przewidywany czas dostawy</th>
+        <th>Stan zamówienia</th>
         <th></th>
     </tr>
     </thead>
@@ -62,6 +63,7 @@
         <th th:text="${Tenprodukt.dataZamowienia}"></th>
         <th th:text="${Tenprodukt.cena}"></th>
         <th th:text="${Tenprodukt.przewidywanyCzasDostawy}"></th>
+        <th th:text="${Tenprodukt.stanZamowienia}"></th>
         <th style="width: 5px">
             <a th:href="@{usunHistorie/{id}(id=${Tenprodukt.id})}" class="btn btn-light">x</a>
         </th>
